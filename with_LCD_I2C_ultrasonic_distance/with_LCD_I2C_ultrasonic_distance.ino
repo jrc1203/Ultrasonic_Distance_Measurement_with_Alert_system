@@ -47,6 +47,8 @@ void loop() {
   Serial.println(distance);
   lcd.setCursor(0,0);
   lcd.print("Distance: ");
+  lcd.print(distance);
+  lcd.print("cm");
 
   //........................Alert System.............................//
   if (distance > 0 && distance <= 10) { //If obstacle under 10cm led and buzzer gives warning
