@@ -1,17 +1,17 @@
-//..................define pin number......................//
+//define pin number
 const int trigPin = 9;
 const int echoPin = 10;
 const int led = 2;
 const int buzzer = 3;
 
-//....................defines variables....................//
+//defines variables
 long duration;
 int distance;
 
 void setup() {
   Serial.begin(9600);  // Starts the serial communication
 
-//...................defines pin modes........................//
+  //defines pin modes
   pinMode(trigPin, OUTPUT);  // Sets the trigPin as an Output
   pinMode(echoPin, INPUT);   // Sets the echoPin as an Input
   pinMode(led, OUTPUT);
@@ -19,8 +19,7 @@ void setup() {
 }
 
 void loop() {
-  //.....................Ultrasonic Sensor Code.......................//
-  // Initialise and Clears the trigPin
+  //Ultrasonic Sensor Code
   digitalWrite(trigPin, LOW);
   delayMicroseconds(2);  //you can also use delay(2);
 
@@ -39,20 +38,15 @@ void loop() {
   Serial.print("Distance: ");
   Serial.println(distance);
 
-  //........................Alert System.............................//
-  if (distance > 0 && distance <= 10) { //If obstacle under 10cm led and buzzer gives warning
+  //Alert System
+  if (distance <= 10) {  //If obstacle under 10cm led and buzzer gives warning
     digitalWrite(led, HIGH);
     digitalWrite(buzzer, HIGH);
-    delay(50);
-    digitalWrite(buzzer,LOW);
-    delay(500);
     Serial.println("DANGER!! STOP!! Obstacle under 10cm");
-  } 
-  else if (distance > 10 && distance <= 25) { //If obstacle under 25cm only led glows for warning
+  } else if (distance > 10 && distance <= 25) {  //If obstacle under 25cm only led glows for warning
     digitalWrite(led, HIGH);
     Serial.println("Alert! Obstacle in front under 25cm");
-  } 
-  else {//Otherwise both turned off
+  } else {  //Otherwise both turned off
     digitalWrite(led, LOW);
     digitalWrite(buzzer, LOW);
   }
